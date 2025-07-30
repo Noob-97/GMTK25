@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovment : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class PlayerMovment : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsTouchingGround)
         {
             print("jump");
-            body.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+            body.AddForce(Vector2.up * 6, ForceMode2D.Impulse);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -24,6 +25,20 @@ public class PlayerMovment : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             IsTouchingGround = true;
+        }
+        if (collision.gameObject.CompareTag("FP"))
+        {
+            if (PlayerPrefs.HasKey("Phase"))
+            {
+                int phase = PlayerPrefs.GetInt("Phase");
+                phase++;
+                PlayerPrefs.SetInt("Phase", phase);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("Phase", 1);
+            }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
