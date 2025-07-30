@@ -13,10 +13,24 @@ public class PlayerMovment : MonoBehaviour
     void Update()
     {
         body.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.linearVelocity.y);
-        if (Input.GetKeyDown(KeyCode.Space) && !IsTouchingGround)
+        if (Input.GetKeyDown(KeyCode.Space) && IsTouchingGround)
         {
             print("jump");
             body.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            IsTouchingGround = true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            IsTouchingGround = false;
         }
     }
 }
