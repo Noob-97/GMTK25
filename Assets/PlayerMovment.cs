@@ -4,13 +4,13 @@ using UnityEngine;
 public class PlayerMovment : MonoBehaviour
 {
     public float speed;
-    private Rigidbody2D body;
-    // Update is called once per frame
+    public  Rigidbody2D body;
+    private void Start()
+    {
+        body = GetComponent<Rigidbody2D>();
+    }
     void Update()
     {
-        
-        
-            body.linearVelocity = new Vector3(Input.GetAxis("Horizontal") * speed, body.linearVelocity.y);
-
+        body.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.linearVelocity.y);
     }
 }
