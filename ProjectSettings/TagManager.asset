@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - FP
+  - Grab
+  - dA
+  - dB
+  - GlobVol
   layers:
   - Default
   - TransparentFX
