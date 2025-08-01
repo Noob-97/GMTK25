@@ -9,6 +9,9 @@ TagManager:
   - dA
   - dB
   - GlobVol
+  - SubBox
+  - Door
+  - music
   layers:
   - Default
   - TransparentFX
@@ -45,6 +48,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Canvas
+    uniqueID: 1575878173
     locked: 0
   m_RenderingLayers:
   - Default

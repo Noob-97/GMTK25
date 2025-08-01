@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/prototype1.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/Loading.unity
+    guid: cb26a3261958e6e4db2a3a92505569b5
+  - enabled: 1
+    path: Assets/Scenes/IntroPlatformer.unity
+    guid: 77da60e1ed521d94296fed6b754b38b4
+  - enabled: 1
+    path: Assets/Scenes/Platformer.unity
+    guid: 95e1064c160977440b311f71c4e84d9b
+  - enabled: 1
+    path: Assets/Scenes/IntroRPG.unity
+    guid: 50c7ff4295f4781438cf8d98ba6a9624
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
