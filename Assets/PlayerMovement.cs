@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject leftref;
     public GameObject rightref;
     public GameObject bullet;
-    public int hits;
+    public static int kills;
     [Header("Debug")]
     public bool MobileControlsOverride;
     public bool BlockInput;
@@ -191,6 +191,16 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    public static void IncreaseKills()
+    {
+        kills++;
+        if (kills == 11)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("11KILLS"));
+        }
+    }
+
     public void ChangeAnimation(string newState)
     {
         if (!BlockInput)
@@ -209,17 +219,9 @@ public class PlayerMovement : MonoBehaviour
             Vector2 newPos = rb.position + delta;
             rb.MovePosition(newPos);
         }
-        if (hits == 0)
-        {
-            Destroy(gameObject);
-        }
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Enemy>() != null)
-        {
-            hits--;
-        }
 
         // Get Entered Entrance and Identify it to leave scene or ignore
         for (int i = 0; i < Entrances.Length; i++)

@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
         }
         if (hits == 0)
         {
+            PlayerMovement.IncreaseKills();
             assignedRoom.progression();
             GameObject.FindGameObjectWithTag("progress").GetComponent<StartEvent>().progression();
             Destroy(gameObject);

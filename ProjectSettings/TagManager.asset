@@ -13,6 +13,7 @@ TagManager:
   - Door
   - music
   - progress
+  - 11KILLS
   layers:
   - Default
   - TransparentFX

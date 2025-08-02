@@ -17,6 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IntroRPG.unity
     guid: 50c7ff4295f4781438cf8d98ba6a9624
+  - enabled: 1
+    path: Assets/Scenes/RPG1.unity
+    guid: 743c0f0fe6e4eea4a9cfb62142fea58d
+  - enabled: 1
+    path: Assets/Scenes/RPG2.unity
+    guid: 2b4c09e84a6876f48869f1751d1d3579
+  - enabled: 1
+    path: Assets/Scenes/IntroFinale.unity
+    guid: df70f31dcfb351b46880b4b4d20d85cf
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
