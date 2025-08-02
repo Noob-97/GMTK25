@@ -8,12 +8,47 @@ public class StartEvent : MonoBehaviour
 {
     public UnityEvent PlayerTrigger;
     public bool DestroyOnExec;
-    private void OnTriggerExit2D(Collider2D collision)
+    public bool EnableAllBelow;
+    public bool EnableAllBelowProgressive;
+    public int Progression;
+    public bool Inverse;
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             PlayerTrigger.Invoke();
+            if (EnableAllBelow)
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    transform.GetChild(i).gameObject.SetActive(true);
+                }
+            }
+            if (EnableAllBelowProgressive)
+            {
+                transform.GetChild(Progression - 1).gameObject.SetActive(!Inverse);
+            }
             if (DestroyOnExec) { Destroy(gameObject); }
+        }
+    }
+
+
+    public void progression()
+    {
+        Progression++;
+        if (EnableAllBelowProgressive)
+        {
+            if (transform.childCount >= Progression && Progression >= 1)
+            {
+                if (!Inverse)
+                {
+                    transform.GetChild(Progression - 1).gameObject.SetActive(true);
+                }
+                else
+                {
+                    Destroy(transform.GetChild(Progression - 1).gameObject);
+                }
+            }
         }
     }
 

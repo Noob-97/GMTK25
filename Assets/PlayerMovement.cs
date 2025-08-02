@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using System;
 using UnityEngine.Events;
+using static UnityEngine.InputSystem.InputAction;
 [Serializable]
 public enum EntranceType
 {
@@ -59,6 +60,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public static string GoingTo;
     [SerializeField] public Entrance[] Entrances;
     [SerializeField] public Interactable[] Interactables;
+    public GameObject upref;
+    public GameObject downref;
+    public GameObject leftref;
+    public GameObject rightref;
+    public GameObject bullet;
+    public int hits;
     [Header("Debug")]
     public bool MobileControlsOverride;
     public bool BlockInput;
@@ -98,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
     {
         vel = new Vector2(speed, speed);
     }
-    public void GetMovement(InputAction.CallbackContext context)
+    public void GetMovement(CallbackContext context)
     {
         if (context.canceled)
         {
@@ -151,6 +158,39 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
+    public void GetSHOOT(CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (BlockInput == false)
+            {
+                Vector2 dir = context.ReadValue<Vector2>();
+                if (dir == Vector2.up)
+                {
+                    GameObject obj = Instantiate(bullet, upref.transform.position, Quaternion.identity);
+                    obj.GetComponent<Bullet>().dir = dir;
+                }
+                if (dir == Vector2.down)
+                {
+                    GameObject obj = Instantiate(bullet, downref.transform.position, Quaternion.identity);
+                    obj.GetComponent<Bullet>().dir = dir;
+
+                }
+                if (dir == Vector2.left)
+                {
+                    GameObject obj = Instantiate(bullet, leftref.transform.position, Quaternion.identity);
+                    obj.GetComponent<Bullet>().dir = dir;
+
+                }
+                if (dir == Vector2.right)
+                {
+                    GameObject obj = Instantiate(bullet, rightref.transform.position, Quaternion.identity);
+                    obj.GetComponent<Bullet>().dir = dir;
+
+                }
+            }
+        }
+    }
     public void ChangeAnimation(string newState)
     {
         if (!BlockInput)
@@ -169,9 +209,18 @@ public class PlayerMovement : MonoBehaviour
             Vector2 newPos = rb.position + delta;
             rb.MovePosition(newPos);
         }
+        if (hits == 0)
+        {
+            Destroy(gameObject);
+        }
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.GetComponent<Enemy>() != null)
+        {
+            hits--;
+        }
+
         // Get Entered Entrance and Identify it to leave scene or ignore
         for (int i = 0; i < Entrances.Length; i++)
         {

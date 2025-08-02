@@ -12,6 +12,7 @@ TagManager:
   - SubBox
   - Door
   - music
+  - progress
   layers:
   - Default
   - TransparentFX
