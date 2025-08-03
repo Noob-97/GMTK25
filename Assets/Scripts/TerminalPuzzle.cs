@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Diagnostics.Contracts;
 using System.IO;
@@ -53,6 +54,7 @@ public class TerminalPuzzle : MonoBehaviour
             Destroy(textwin);
             Destroy(textweb);
             completed.Play();
+            GameObject.FindGameObjectWithTag("music").GetComponent<AudioSource>().DOFade(0, 15f);
             End(40);
         }
     }

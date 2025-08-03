@@ -6,7 +6,8 @@ public class ChangeDimension : MonoBehaviour
     public GameObject dimensionB;
     public Transform instantiatorRef; // instantiate dimension at following pos
     static bool ChangedDimension; // false = dimensionA; true = dimensionB
-    private void OnTriggerStay2D(Collider2D collision)
+
+    public void DimensionChange()
     {
         print("Press E!");
         if (Input.GetKeyDown(KeyCode.E))

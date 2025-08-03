@@ -10,8 +10,10 @@ public class PlayerMovment : MonoBehaviour
     public bool IsTouchingGround;
     bool onDoor;
     bool endingDoor;
+    bool onPortal;
     public Transform repos;
     public UnityEvent end;
+    public int WorldThreshold = -40;
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -40,6 +42,7 @@ public class PlayerMovment : MonoBehaviour
         {
             if (endingDoor)
             {
+                GameObject.FindGameObjectWithTag("music").GetComponent<AudioSource>().Play();
                 end.Invoke();
                 Destroy(gameObject);
             }
@@ -47,6 +50,16 @@ public class PlayerMovment : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
+        }
+        if (Input.GetKeyDown(KeyCode.E) && onPortal)
+        {
+            GameObject.FindGameObjectWithTag("portal").GetComponent<ChangeDimension>().DimensionChange();
+        }
+
+        if (transform.position.y <= WorldThreshold)
+        {
+            SimulateLoading.NextScene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene("Loading");
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -91,6 +104,10 @@ public class PlayerMovment : MonoBehaviour
                 }
             }
         }
+        if (collision.gameObject.CompareTag("portal"))
+        {
+            onPortal = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -101,6 +118,10 @@ public class PlayerMovment : MonoBehaviour
             {
                 onDoor = false;
             }
+        }
+        if (collision.gameObject.CompareTag("portal"))
+        {
+            onPortal = false;
         }
     }
 }

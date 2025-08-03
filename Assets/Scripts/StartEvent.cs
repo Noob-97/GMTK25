@@ -80,6 +80,7 @@ public class StartEvent : MonoBehaviour
                    "GameManager.Update () (at Assets/Scripts/GameManager.cs:42)", "UnityPlayer.dll", 0x00000010);
 #endif
             FakeError = false;
+            GameObject.FindGameObjectWithTag("music").GetComponent<AudioSource>().DOFade(0, 5f);
         }
     }
 
