@@ -99,4 +99,16 @@ public class StartEvent : MonoBehaviour
         SimulateLoading.NextScene = NextScene;
         SceneManager.LoadScene("Loading");
     }
+
+    public void EndGame(float time)
+    {
+        StartCoroutine(end(time));
+    }
+
+    IEnumerator end(float time)
+    {
+        yield return new WaitForSeconds(time);
+        PlayerPrefs.DeleteKey("end");
+        Application.Quit();
+    }
 }

@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovment : MonoBehaviour
@@ -8,7 +9,9 @@ public class PlayerMovment : MonoBehaviour
     public Rigidbody2D body;
     public bool IsTouchingGround;
     bool onDoor;
+    bool endingDoor;
     public Transform repos;
+    public UnityEvent end;
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -35,7 +38,15 @@ public class PlayerMovment : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && onDoor)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (endingDoor)
+            {
+                end.Invoke();
+                Destroy(gameObject);
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -74,6 +85,10 @@ public class PlayerMovment : MonoBehaviour
             if (collision.GetComponent<OpenDoor>().openedFlag)
             {
                 onDoor = true;
+                if (collision.GetComponent<OpenDoor>().EndingDoor)
+                {
+                    endingDoor = true;
+                }
             }
         }
     }

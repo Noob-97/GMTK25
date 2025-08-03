@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OpenDoor : MonoBehaviour
 {
     public bool isDoorOpen;
     public bool openedFlag;
+    public bool EndingDoor;
     private void Update()
     {
         if (isDoorOpen)

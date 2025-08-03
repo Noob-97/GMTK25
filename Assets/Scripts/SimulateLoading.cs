@@ -8,6 +8,10 @@ public class SimulateLoading : MonoBehaviour
     public float LoadingTime = 3f; // Duration of the simulated loading time
     void Start()
     {
+        if (PlayerPrefs.HasKey("end"))
+        {
+            NextScene = "Ending";
+        }
         StartCoroutine(SimulateLoad());
     }
 
