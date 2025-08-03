@@ -8,9 +8,14 @@ public class PlayerMovment : MonoBehaviour
     public Rigidbody2D body;
     public bool IsTouchingGround;
     bool onDoor;
+    public Transform repos;
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
+    }
+    public void ReposPlayer()
+    {
+        transform.position = repos.position;
     }
     void Update()
     {
